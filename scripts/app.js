@@ -16,7 +16,7 @@ function selectSeat(e) {
 
   createElement(e.target.innerText);
 
- // apply coupon and calculate discount 
+  // apply coupon and calculate discount
   function applyCoupon() {
     const totalPrice = getValue('total-price');
     const newPrice = totalPrice + 550;
@@ -30,7 +30,10 @@ function selectSeat(e) {
       setInnerText('grand-total', newGrandTotal);
 
       document.getElementById('coupon-field').classList.add('hidden');
-    
+
+      setTimeout(() => {
+        alert('Now provide your name and mobile number to confirm your purchase')
+      }, 300)
     } else if (inputField.value === 'Couple 20') {
       const totalDiscount = newPrice * 0.2;
       const newGrandTotal = newPrice - totalDiscount;
@@ -38,13 +41,17 @@ function selectSeat(e) {
       setInnerText('grand-total', newGrandTotal);
 
       document.getElementById('coupon-field').classList.add('hidden');
+
+       setTimeout(() => {
+         alert(
+           'Now provide your name and mobile number to confirm your purchase'
+         );
+       }, 300);
     } else {
       alert('Sorry! the coupon code is incorrect');
       inputField.value = '';
     }
   }
-
-
 
   // enable apply button
   const btnApply = document.getElementById('apply-btn');
@@ -53,16 +60,15 @@ function selectSeat(e) {
     btnApply.addEventListener('click', applyCoupon);
   }
 
+  // enable next button
   const btnNext = document.getElementById('next-btn');
-  
-   document.getElementById('number-input').addEventListener('keyup', (e) => {
-     const number = e.target.value;
-     if (number) {
-       btnNext.removeAttribute('disabled');
-      
-      }
-   });
-  
+
+  document.getElementById('number-input').addEventListener('keyup', (e) => {
+    const number = e.target.value;
+    if (number) {
+      btnNext.removeAttribute('disabled');
+    }
+  });
 }
 
 // create element function
@@ -87,10 +93,6 @@ function createElement(text) {
   tBody.appendChild(tr);
 }
 
-// name and phone input function
-
-
-
 // add event listener
 const allSeats = document.getElementsByClassName('kbd');
 
@@ -98,4 +100,8 @@ for (let seat of allSeats) {
   seat.addEventListener('click', selectSeat);
 }
 
-
+document.getElementById('continue-btn').addEventListener('click', () => {
+  setTimeout(() => {
+    window.location.reload();
+  }, 1200)
+});
